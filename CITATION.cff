@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, cite this repository and the original UCI dataset."
+title: "Sentiment Classification: Traditional ML vs Deep Learning"
+type: software
+authors:
+  - family-names: Li
+    given-names: Yumeng
+version: 0.1.0
+date-released: 2026-08-11
+license: MIT
+repository-code: "https://github.com/hhhhollow/sentiment-ml-vs-transformers"
+references:
+  - type: dataset
+    title: "Sentiment Labelled Sentences"
+    authors:
+      - family-names: Kotzias
+        given-names: Dimitrios
+    year: 2015
+    doi: 10.24432/C57604

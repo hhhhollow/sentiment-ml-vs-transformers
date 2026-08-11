@@ -1,0 +1,5 @@
+candidate,reference,metric,delta,ci_low,ci_high,bootstrap_iterations
+pytorch_textcnn,tfidf_logistic_regression,macro_f1,-0.13087285165322404,-0.16944721871340848,-0.0939893415288844,1000
+pytorch_textcnn,tfidf_logistic_regression,accuracy,-0.1308724832214765,-0.16946308724832215,-0.09395973154362425,1000
+distilbert,tfidf_logistic_regression,macro_f1,0.07549596268152547,0.04362884174347627,0.1090602017002022,1000
+distilbert,tfidf_logistic_regression,accuracy,0.0755033557046979,0.043624161073825496,0.10906040268456374,1000

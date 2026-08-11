@@ -1,0 +1,68 @@
+name: Full benchmark
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: full-benchmark-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  MPLBACKEND: Agg
+  MPLCONFIGDIR: .mpl-cache
+  TOKENIZERS_PARALLELISM: "false"
+  HF_HOME: artifacts/huggingface
+  OMP_NUM_THREADS: "2"
+
+jobs:
+  benchmark:
+    name: UCI data + all three models (CPU)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.1"
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: |
+            uv.lock
+            pyproject.toml
+          prune-cache: true
+
+      - name: Verify and install locked dependencies
+        run: |
+          uv lock --check
+          uv sync --frozen --all-groups
+
+      - name: Run formal benchmark
+        run: uv run --frozen sentiment-benchmark run-all --device cpu
+
+      - name: Verify required evidence
+        run: |
+          test -s artifacts/models/tfidf_logistic.joblib
+          test -s artifacts/models/textcnn/model.safetensors
+          test -s artifacts/models/distilbert/model.safetensors
+          test -s reports/model_comparison.csv
+          test -s reports/benchmark_summary.json
+
+      - name: Upload reproducible run outputs
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sentiment-benchmark-${{ github.run_id }}
+          path: |
+            artifacts/models/**
+            data/processed/split_assignments.csv
+            reports/**
+          if-no-files-found: error
+          retention-days: 14

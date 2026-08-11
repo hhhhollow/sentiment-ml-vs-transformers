@@ -1,0 +1,10 @@
+candidate_index,candidate,representation,C,validation_macro_f1,feature_count,fit_seconds,trained_rows,selected
+0,word_unigram_c0.5,word_unigram,0.5,0.7986214353290986,3797,0.009366874990519136,train_only,False
+1,word_unigram_c1,word_unigram,1.0,0.8036907225201639,3797,0.008694083997397684,train_only,False
+2,word_unigram_c2,word_unigram,2.0,0.8171094601176215,3797,0.009018958007800393,train_only,False
+3,word_bigram_c0.5,word_bigram,0.5,0.7918619322278299,16920,0.01946245900762733,train_only,False
+4,word_bigram_c1,word_bigram,1.0,0.800290030551762,16920,0.019854874990414828,train_only,False
+5,word_bigram_c2,word_bigram,2.0,0.8019777447402803,16920,0.08304499999212567,train_only,False
+6,word_char_c0.5,word_char,0.5,0.833787335453575,47231,0.09041145800438244,train_only,False
+7,word_char_c1,word_char,1.0,0.8455941157255658,47231,0.09256124999956228,train_only,True
+8,word_char_c2,word_char,2.0,0.8439592922596174,47231,0.09441466600401327,train_only,False

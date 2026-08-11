@@ -1,0 +1,10 @@
+split,source,rows,positive_rate
+train,amazon,593,0.4974704890387858
+train,imdb,597,0.4991624790619765
+train,yelp,597,0.5008375209380235
+validation,amazon,197,0.49746192893401014
+validation,imdb,199,0.5025125628140703
+validation,yelp,200,0.5
+test,amazon,197,0.49746192893401014
+test,imdb,200,0.5
+test,yelp,199,0.5025125628140703

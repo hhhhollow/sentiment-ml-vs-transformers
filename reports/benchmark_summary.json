@@ -1,0 +1,21 @@
+{
+  "champion_model": "distilbert",
+  "champion_test_accuracy": 0.9228187919463087,
+  "champion_test_macro_f1": 0.9228109690860973,
+  "comparison": "reports/model_comparison.csv",
+  "data_sha256": "af9278adf08e1b69ca08b28aa6d7fd0fb22051ece771f327b52a2ddbe658f074",
+  "elapsed_seconds": 264.50360566600284,
+  "fast": false,
+  "manifest": "reports/run_manifest.json",
+  "models_compared": [
+    "tfidf_logistic_regression",
+    "pytorch_textcnn",
+    "distilbert"
+  ],
+  "prepared_rows": 2979,
+  "report": "reports/EXPERIMENT_REPORT.md",
+  "test_rows": 596,
+  "train_rows": 1787,
+  "transformer_revision": "12040accade4e8a0f71eabdb258fecc2e7e948be",
+  "validation_rows": 596
+}

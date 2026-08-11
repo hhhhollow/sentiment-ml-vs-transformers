@@ -1,0 +1,26 @@
+.DS_Store
+.venv/
+.uv-cache/
+.pytest_cache/
+.ruff_cache/
+.mpl-cache/
+.coverage
+htmlcov/
+__pycache__/
+*.py[cod]
+
+# Reproducibly downloaded or generated data.
+data/raw/*
+data/processed/*
+data/predictions/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/predictions/.gitkeep
+
+# Model weights and local caches are large/reproducible.
+artifacts/models/*
+artifacts/huggingface/
+!artifacts/models/.gitkeep
+
+# Local benchmark scratch files.
+*.log
