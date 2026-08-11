@@ -1,0 +1,18 @@
+{
+  "data_sha256": "af9278adf08e1b69ca08b28aa6d7fd0fb22051ece771f327b52a2ddbe658f074",
+  "missing_cells": 0,
+  "normalised_duplicates_removed": 21,
+  "normalised_text_duplicates_remaining": 0,
+  "positive_rate": 0.499496475327291,
+  "prepared_rows": 2979,
+  "raw_rows": 3000,
+  "source_count": 3,
+  "sources": [
+    "amazon",
+    "imdb",
+    "yelp"
+  ],
+  "test_rows": 596,
+  "train_rows": 1787,
+  "validation_rows": 596
+}

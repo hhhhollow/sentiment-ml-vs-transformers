@@ -1,0 +1,4 @@
+source,rows,positive_rate,median_characters,p95_characters,median_words
+amazon,987,0.49746707193515705,48.0,125.69999999999993,9.0
+imdb,996,0.5,66.0,185.0,12.0
+yelp,996,0.501004016064257,51.0,121.0,10.0

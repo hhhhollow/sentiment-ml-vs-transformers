@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  MPLBACKEND: Agg
+  MPLCONFIGDIR: .mpl-cache
+  TOKENIZERS_PARALLELISM: "false"
+  OMP_NUM_THREADS: "2"
+  OPENBLAS_NUM_THREADS: "2"
+  MKL_NUM_THREADS: "2"
+
+jobs:
+  quality-and-offline-tests:
+    name: Quality and offline model tests (Python 3.13)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.1"
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: |
+            uv.lock
+            pyproject.toml
+          prune-cache: true
+
+      - name: Verify lock and install dependencies
+        run: |
+          uv lock --check
+          uv sync --frozen --all-groups
+
+      - name: Run Ruff
+        run: |
+          uv run --frozen ruff check .
+          uv run --frozen ruff format --check .
+
+      - name: Run offline suite with coverage
+        run: >-
+          uv run --frozen pytest
+          --cov=sentiment_benchmark
+          --cov-report=term-missing
+          --cov-fail-under=80
+
+      - name: Verify committed report contracts
+        run: |
+          test -s reports/model_comparison.csv
+          test -s reports/paired_deltas_vs_tfidf.csv
+          test -s reports/run_manifest.json
+          test -s reports/EXPERIMENT_REPORT.md
